@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/sample/example")
-class ExampleController(private val exampleService: ExampleService) {
+class ExampleController(private val exampleService: ExampleService, private val apiResponseFactory: ApiResponseFactory) {
 
     @GetMapping("/data")
     suspend fun findAll(): List<ExampleResponse> {
@@ -19,10 +19,10 @@ class ExampleController(private val exampleService: ExampleService) {
     }
     @GetMapping("/success")
     suspend fun exampleSuccess(): ApiResponse<List<ExampleResponse>> {
-        return ApiResponseFactory.success(exampleService.findAll())
+        return apiResponseFactory.success(exampleService.findAll())
     }
     @GetMapping("/error")
     suspend fun exampleError(): ApiResponse<Nothing> {
-        return ApiResponseFactory.fail(ErrorCode.SYSTEM_ERROR)
+        return apiResponseFactory.fail(ErrorCode.SYSTEM_ERROR)
     }
 }

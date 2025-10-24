@@ -5,3 +5,8 @@ spring:
     url: r2dbc:mariadb://192.168.50.108:3306/lms?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     username: 'admin'
     password: 'fpahsk26#'
+  messages:
+    basename: messages/messages
+    encoding: UTF-8
+    fallback-to-system-locale: false
+    always-use-message-format: true
