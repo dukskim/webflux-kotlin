@@ -1,3 +1,7 @@
 spring:
   application:
     name: sample
+  r2dbc:
+    url: r2dbc:mariadb://192.168.50.108:3306/lms?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    username: 'admin'
+    password: 'fpahsk26#'
