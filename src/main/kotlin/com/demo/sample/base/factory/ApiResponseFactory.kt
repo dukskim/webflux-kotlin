@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component
 @Component
 class ApiResponseFactory(private val messageProvider: MessageProvider) {
 
-    fun <T> success(data: T): ResponseEntity<ApiResponse<T>> =
+    fun <T> success(data: T?): ResponseEntity<ApiResponse<T>> =
         ResponseEntity.ok(ApiResponse(result = ResultCode.SUCCESS, code = null, msg = null, data = data))
 
-    fun <T> success(data: T, msg: String = "성공"): ResponseEntity<ApiResponse<T>> =
+    fun <T> success(data: T?, msg: String = "성공"): ResponseEntity<ApiResponse<T>> =
         ResponseEntity.ok(ApiResponse(result = ResultCode.SUCCESS, code = null, msg = msg, data = data))
 
     fun fail(code: ErrorCode): ResponseEntity<ApiResponse<Nothing>> =

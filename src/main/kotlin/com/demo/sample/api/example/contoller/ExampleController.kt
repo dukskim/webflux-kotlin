@@ -6,7 +6,9 @@ import com.demo.sample.api.example.service.ExampleService
 import com.demo.sample.base.dto.ApiResponse
 import com.demo.sample.base.enums.ErrorCode
 import com.demo.sample.base.factory.ApiResponseFactory
+import com.demo.sample.base.properties.CorsProperties
 import com.demo.sample.core.exception.ApiException
+import com.demo.sample.core.exception.GlobalExceptionHandler
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -14,6 +16,8 @@ import jakarta.validation.Valid
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
@@ -27,7 +31,13 @@ import org.springframework.web.bind.annotation.RestController
 @Validated  // Get Method 의 RequestParam 검증 시 사용 ->> @NotBlank(message = "A2001:aaa")@RequestParam(value = "aaa", required = false) aaa: String
 @RestController
 @RequestMapping("/api/sample/example")
-class ExampleController(private val exampleService: ExampleService, private val apiResponseFactory: ApiResponseFactory) {
+class ExampleController(
+    private val exampleService: ExampleService,
+    private val apiResponseFactory: ApiResponseFactory,
+    private val corsProperties: CorsProperties
+) {
+
+    private val logger: Logger = LoggerFactory.getLogger(ExampleController::class.java)
 
     @Operation(
         summary = "예제 목록 조회",
@@ -103,5 +113,14 @@ class ExampleController(private val exampleService: ExampleService, private val 
         id: String?
     ): ResponseEntity<ApiResponse<List<ExampleResponse>>> {
         return apiResponseFactory.success(exampleService.findAll())
+    }
+
+    @Operation(
+        summary = "Cors 설정",
+        description = "Cors 설정"
+    )
+    @GetMapping("/cors")
+    suspend fun exampleCors(): ResponseEntity<ApiResponse<Any>> {
+        return apiResponseFactory.success(corsProperties)
     }
 }

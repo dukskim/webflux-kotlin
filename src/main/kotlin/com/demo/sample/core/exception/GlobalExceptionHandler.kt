@@ -3,7 +3,6 @@ package com.demo.sample.core.exception
 import com.demo.sample.base.dto.ApiResponse
 import com.demo.sample.base.enums.ErrorCode
 import com.demo.sample.base.factory.ApiResponseFactory
-import com.demo.sample.base.provider.MessageProvider
 import jakarta.validation.ConstraintViolationException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.bind.support.WebExchangeBindException
 
 @RestControllerAdvice
-class GlobalExceptionHandler(private val messageProvider: MessageProvider, private val responseFactory: ApiResponseFactory
+class GlobalExceptionHandler(private val responseFactory: ApiResponseFactory
 ) {
 
     // Log
