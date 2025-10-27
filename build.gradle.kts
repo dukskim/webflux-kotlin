@@ -37,8 +37,12 @@ dependencies {
     //log
     implementation("org.slf4j:slf4j-api")
 
+    // swagger
+    implementation("org.springdoc:springdoc-openapi-starter-webflux-ui:2.8.6")
+
     // mariadb
     runtimeOnly("org.mariadb:r2dbc-mariadb:1.3.0")
+
 
 
 }
