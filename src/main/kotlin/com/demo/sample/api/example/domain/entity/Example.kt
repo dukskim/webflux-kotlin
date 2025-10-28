@@ -1,4 +1,4 @@
-package com.demo.sample.api.example.model.entity
+package com.demo.sample.api.example.domain.entity
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
